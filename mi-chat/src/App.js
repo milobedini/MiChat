@@ -1,13 +1,14 @@
+import Chat from './components/Chat'
+import Sidebar from './components/Sidebar'
 import './styles/main.scss'
 
 function App() {
   return (
-    <div className="App">
-      <h1>MiChat</h1>
-
-      {/* Sidebar component */}
-
-      {/* Chat component */}
+    <div className="app">
+      <div className="app-body">
+        <Sidebar />
+        <Chat />
+      </div>
     </div>
   )
 }
