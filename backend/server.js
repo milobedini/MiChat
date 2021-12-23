@@ -3,7 +3,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import Messages from './dbMessages.js'
 import Pusher from 'pusher'
-// import cors from 'cors'
+import cors from 'cors'
 // config
 const app = express()
 const port = process.env.PORT || 9000
@@ -18,6 +18,7 @@ const pusher = new Pusher({
 
 //json parser
 app.use(express.json())
+app.use(cors())
 // app.use(cors)
 // logger middleware
 app.use((req, _res, next) => {
@@ -46,6 +47,8 @@ db.once('open', () => {
       pusher.trigger('messages', 'inserted', {
         name: messageDetails.name,
         message: messageDetails.message,
+        timestamp: messageDetails.timestamp,
+        received: messageDetails.received,
       })
       //   above will appear in pusher debug console
     } else {

@@ -5,8 +5,23 @@ import AttachFile from '@material-ui/icons/AttachFile'
 import MoreVert from '@material-ui/icons/MoreVert'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import MicIcon from '@material-ui/icons/Mic'
+import { useState } from 'react'
+import axios from './Axios'
 
-const Chat = () => {
+const Chat = ({ messages }) => {
+  const [input, setInput] = useState('')
+
+  const sendMessage = async (event) => {
+    event.preventDefault()
+    await axios.post('messages/new', {
+      message: input,
+      name: 'Milo Bedini',
+      timestamp: 'just now',
+      received: false,
+    })
+    setInput('')
+  }
+
   return (
     <div className="chat">
       <div className="chat-header">
@@ -28,28 +43,23 @@ const Chat = () => {
         </div>
       </div>
       <div className="chat-body">
-        <p className="chat-message">
-          <span className="chat-name">Milo</span>
-          This is a message
-          <span className="chat-timestamp">{new Date().toUTCString()}</span>
-        </p>
-        <p className="chat-message chat-receiver">
-          <span className="chat-name">Milo</span>
-          This is a message
-          <span className="chat-timestamp">{new Date().toUTCString()}</span>
-        </p>
-        <p className="chat-message">
-          <span className="chat-name">Milo</span>
-          This is a message
-          <span className="chat-timestamp">{new Date().toUTCString()}</span>
-        </p>
+        {messages.map((message, index) => (
+          <p
+            key={index}
+            className={`chat-message ${message.received && 'chat-receiver'}`}
+          >
+            <span className="chat-name">{message.name}</span>
+            {message.message}
+            <span className="chat-timestamp">{message.timestamp}</span>
+          </p>
+        ))}
       </div>
       <div className="chat-footer">
         <InsertEmoticonIcon />
-        <form>
+        <form onSubmit={sendMessage}>
           <input
-            // value={input}
-            // onChange={(event) => setInput(event.target.value)}
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
             placeholder="Type a message"
             type={'text'}
           />
