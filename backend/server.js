@@ -36,7 +36,18 @@ db.once('open', () => {
   const changeStream = messageCollection.watch()
   //   fire off once something changes
   changeStream.on('change', (change) => {
-    console.log('Incoming change ->', change)
+    console.log('Incoming change')
+
+    if (change.operationType === 'insert') {
+      const messageDetails = change.fullDocument
+      //   insert data into messages channel
+      pusher.trigger('messages', 'inserted', {
+        name: messageDetails.user,
+        message: messageDetails.message,
+      })
+    } else {
+      console.log('Error triggering Pusher')
+    }
   })
 })
 
