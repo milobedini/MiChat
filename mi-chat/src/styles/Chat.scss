@@ -59,8 +59,20 @@
   align-items: center;
   height: 62px;
   border-top: 1px solid lightgray;
+  svg {
+    color: gray;
+  }
   form {
     flex: 1;
     display: flex;
+    input {
+      flex: 1;
+      border-radius: 30px;
+      padding: 10px;
+      border: none;
+    }
+    button {
+      display: none;
+    }
   }
 }
