@@ -48,9 +48,9 @@ const Chat = ({ messages }) => {
             key={index}
             className={`chat-message ${message.received && 'chat-receiver'}`}
           >
-            <span className="chat-name">{message.name}</span>
+            <span className="chat-name">{message.owner}</span>
             {message.message}
-            <span className="chat-timestamp">{message.timestamp}</span>
+            <span className="chat-timestamp">{message.creaetedAt}</span>
           </p>
         ))}
       </div>

@@ -5,6 +5,7 @@ import { port, dbURI } from './config/environment.js'
 import Messages from './models/dbMessages.js'
 import Pusher from 'pusher'
 import cors from 'cors'
+import router from './config/router.js'
 // config
 const app = express()
 
@@ -26,16 +27,9 @@ const startServers = async () => {
     app.use(express.json())
     app.use(cors())
 
-    // logger middleware
-    app.use((req, _res, next) => {
-      console.log(`Request received for ${req.method} at ${req.url}`)
-      next()
-    })
-
-    // once db connected
     mongoose.connection.once('open', () => {
       console.log('DB connected')
-      const messageCollection = db.collection('messagecontents')
+      const messageCollection = mongoose.collection('messagecontents')
       const changeStream = messageCollection.watch()
       //   fire off once something changes
       changeStream.on('change', (change) => {
@@ -54,31 +48,42 @@ const startServers = async () => {
       })
     })
 
+    // logger middleware
+    app.use((req, _res, next) => {
+      console.log(`Request received for ${req.method} at ${req.url}`)
+      next()
+    })
+
+    // once db connected
+    // console.log(mongoose.connection)
+
     // routes
 
-    app.get('/', (_req, res) => res.status(200).send("You're all good")) // test route
+    app.use('/api', router)
 
-    app.get('/api/messages/sync', (_req, res) => {
-      Messages.find((err, data) => {
-        if (err) {
-          res.status(500).send(err)
-        } else {
-          res.status(200).send(data)
-        }
-      })
-    })
+    // app.get('/', (_req, res) => res.status(200).send("You're all good")) // test route
 
-    app.post('/api/messages/new', (req, res) => {
-      const dbMessage = req.body
+    // app.get('/api/messages/sync', (_req, res) => {
+    //   Messages.find((err, data) => {
+    //     if (err) {
+    //       res.status(500).send(err)
+    //     } else {
+    //       res.status(200).send(data)
+    //     }
+    //   })
+    // })
 
-      Messages.create(dbMessage, (err, data) => {
-        if (err) {
-          res.status(500).send(err)
-        } else {
-          res.status(201).send(data)
-        }
-      })
-    })
+    // app.post('/api/messages/new', (req, res) => {
+    //   const dbMessage = req.body
+
+    //   Messages.create(dbMessage, (err, data) => {
+    //     if (err) {
+    //       res.status(500).send(err)
+    //     } else {
+    //       res.status(201).send(data)
+    //     }
+    //   })
+    // })
     // catch all
     app.use((_req, res) => {
       res.status(404).json({ message: 'Route not found' })
