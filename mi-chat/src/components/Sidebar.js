@@ -4,6 +4,7 @@ import { IconButton, Avatar } from '@material-ui/core'
 import ChatIcon from '@material-ui/icons/Chat'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import SearchOutlined from '@material-ui/icons/SearchOutlined'
+
 import milopic from '../images/milopic.jpg'
 import SidebarChat from './SidebarChat'
 
@@ -13,6 +14,8 @@ const Sidebar = () => {
       <div className="sidebar-header">
         <Avatar src={milopic} />
         <div className="sidebar-header-right">
+          <button>Login</button>
+          <button>Register</button>
           <IconButton>
             <DonutLargeIcon />
           </IconButton>
