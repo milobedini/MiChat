@@ -10,12 +10,15 @@ const messageSchema = new mongoose.Schema(
 )
 messageSchema.plugin(uniqueValidator)
 
-const conversationSchema = new mongoose.Schema({
-  participants: [
-    { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-  ],
-  messages: [messageSchema],
-})
+const conversationSchema = new mongoose.Schema(
+  {
+    participants: [
+      { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+    ],
+    messages: [messageSchema],
+  },
+  { timestamps: true }
+)
 
 conversationSchema.plugin(uniqueValidator)
 

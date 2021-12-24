@@ -25,6 +25,7 @@ export const getSingleConversation = async (req, res) => {
           model: 'User',
         },
       })
+      .sort({ updatedAt: 'desc', 'messages.createdAt': 'desc' })
     return res.status(200).json(conversation)
   } catch (err) {
     console.log(err, 'Convo not found')

@@ -22,9 +22,11 @@ const Sidebar = ({ conversations }) => {
           <IconButton>
             <DonutLargeIcon />
           </IconButton>
-          <IconButton>
-            <ChatIcon />
-          </IconButton>
+          <Link to="/new">
+            <IconButton>
+              <ChatIcon />
+            </IconButton>
+          </Link>
           <IconButton>
             <MoreVertIcon />
           </IconButton>

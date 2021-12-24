@@ -1,7 +1,7 @@
 import '../styles/Register.scss'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axios from './Axios'
 
 const Register = () => {
   const [data, setData] = useState({
@@ -22,7 +22,7 @@ const Register = () => {
   const handleSubmit = async (event) => {
     event.preventDefault()
     try {
-      const res = await axios.post('/api/register', data)
+      const res = await axios.post('register', data)
       handleSuccessfulRegister()
       console.log(res.data)
     } catch (err) {
@@ -53,6 +53,49 @@ const Register = () => {
             placeholder="Username"
           />
           <label htmlFor="username"></label>
+        </div>
+        <div>
+          <input
+            type="email"
+            name="email"
+            onChange={handleFormChange}
+            id="email"
+            placeholder="Email"
+          />
+          <label htmlFor="email"></label>
+        </div>
+        <div>
+          <input
+            type="text"
+            name="fullname"
+            onChange={handleFormChange}
+            id="fullname"
+            placeholder="Your full name"
+          />
+          <label htmlFor="fullname"></label>
+        </div>
+        <div>
+          <input
+            type="password"
+            name="password"
+            onChange={handleFormChange}
+            id="password"
+            placeholder="Password"
+          />
+          <label htmlFor="password"></label>
+        </div>
+        <div>
+          <input
+            type="password"
+            name="passwordConfirmation"
+            onChange={handleFormChange}
+            id="passwordConfirmation"
+            placeholder="Password again"
+          />
+          <label htmlFor="passwordConfirmation"></label>
+        </div>
+        <div>
+          <input type={'submit'} value="Sign Up" />
         </div>
       </form>
     </div>
