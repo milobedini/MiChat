@@ -7,6 +7,7 @@ import SearchOutlined from '@material-ui/icons/SearchOutlined'
 
 import milopic from '../images/milopic.jpg'
 import SidebarChat from './SidebarChat'
+import { Link } from 'react-router-dom'
 
 const Sidebar = ({ conversations }) => {
   return (
@@ -15,7 +16,9 @@ const Sidebar = ({ conversations }) => {
         <Avatar src={milopic} />
         <div className="sidebar-header-right">
           <button>Login</button>
-          <button>Register</button>
+          <Link to="/register">
+            <button>Register</button>
+          </Link>
           <IconButton>
             <DonutLargeIcon />
           </IconButton>

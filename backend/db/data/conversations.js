@@ -10,4 +10,15 @@ export default [
       },
     ],
   },
+  {
+    participants: [],
+    messages: [
+      {
+        message: 'Football?',
+      },
+      {
+        message: 'Yeah why not',
+      },
+    ],
+  },
 ]

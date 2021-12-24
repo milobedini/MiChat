@@ -1,5 +1,9 @@
 import express from 'express'
-import { getAllConversations } from '../controllers/conversations.js'
+import { loginUser, registerUser } from '../controllers/auth.js'
+import {
+  getAllConversations,
+  getSingleConversation,
+} from '../controllers/conversations.js'
 // import {
 //   getAllMessages,
 //   getSingleMessage,
@@ -18,5 +22,11 @@ const router = express.Router()
 router.route('/users').get(getAllUsers) //test route
 
 router.route('/conversations').get(getAllConversations) //test route
+
+router.route('/conversations/:id').get(getSingleConversation)
+
+router.route('/register').post(registerUser)
+
+router.route('/login').post(loginUser)
 
 export default router

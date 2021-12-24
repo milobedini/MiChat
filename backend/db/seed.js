@@ -30,7 +30,6 @@ const seedDatabase = async () => {
       conversation.participants = [users[1]._id, users[2]._id]
       conversation.messages[0].owner = users[1]._id
       conversation.messages[1].owner = users[2]._id
-      console.log(conversation)
       return conversation
     })
 
