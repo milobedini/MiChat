@@ -46,11 +46,12 @@ const Chat = ({ messages }) => {
         {messages.map((message, index) => (
           <p
             key={index}
+            // not current user logic below
             className={`chat-message ${message.received && 'chat-receiver'}`}
           >
-            <span className="chat-name">{message.owner}</span>
+            <span className="chat-name">{message.owner.fullname}</span>
             {message.message}
-            <span className="chat-timestamp">{message.creaetedAt}</span>
+            <span className="chat-timestamp">{message.createdAt}</span>
           </p>
         ))}
       </div>
