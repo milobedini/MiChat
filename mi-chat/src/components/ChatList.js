@@ -7,8 +7,9 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon'
 import MicIcon from '@material-ui/icons/Mic'
 import { useState } from 'react'
 import axios from './Axios'
+import Chat from './Chat'
 
-const ChatList = () => {
+const ChatList = ({ conversations }) => {
   const [input, setInput] = useState('')
 
   const sendMessage = async (event) => {
@@ -43,6 +44,9 @@ const ChatList = () => {
         </div>
       </div>
       <div className="chat-body">
+        {conversations.map((conversation) => (
+          <Chat {...conversation} key={conversation._id} />
+        ))}
         {/* {conversations.map((conversation, index) => (
           <p
             key={index}

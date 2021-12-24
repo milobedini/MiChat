@@ -8,7 +8,9 @@ const SidebarChat = ({ _id, participants, messages }) => {
       <div className="sidebar-chat-info">
         <h2>
           {participants.map((participant) => (
-            <small>{participant.fullname}, </small>
+            <span key={participant._id}>
+              <small>{participant.fullname}, </small>
+            </span>
           ))}
         </h2>
         <p>Most recent message:</p>
