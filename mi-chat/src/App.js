@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react'
-import Chat from './components/Chat'
 import Sidebar from './components/Sidebar'
 import './styles/main.scss'
 import axios from './components/Axios'
+import ChatList from './components/ChatList'
 
 function App() {
-  const [messages, setMessages] = useState([])
+  const [conversations, setConversations] = useState([])
 
   useEffect(() => {
-    axios.get('messages/sync').then((response) => {
-      setMessages(response.data)
-      console.log(messages)
+    axios.get('conversations').then((response) => {
+      setConversations(response.data)
+      console.log(conversations)
     })
   }, [])
 
-  console.log(messages)
+  console.log(conversations)
 
   return (
     <div className="app">
       <div className="app-body">
-        <Sidebar />
-        <Chat messages={messages} />
+        <Sidebar conversations={conversations} />
+        <ChatList conversations={conversations} />
       </div>
     </div>
   )

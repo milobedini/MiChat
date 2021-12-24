@@ -8,7 +8,7 @@ import SearchOutlined from '@material-ui/icons/SearchOutlined'
 import milopic from '../images/milopic.jpg'
 import SidebarChat from './SidebarChat'
 
-const Sidebar = () => {
+const Sidebar = ({ conversations }) => {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -34,9 +34,13 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="sidebar-chats">
-        <SidebarChat />
-        <SidebarChat />
-        <SidebarChat />
+        <ul>
+          {conversations.map((conversation) => (
+            <li key={conversation._id}>
+              <SidebarChat {...conversation} />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )
