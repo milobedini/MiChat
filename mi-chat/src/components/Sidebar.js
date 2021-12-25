@@ -9,16 +9,35 @@ import milopic from '../images/milopic.jpg'
 import SidebarChat from './SidebarChat'
 import { Link } from 'react-router-dom'
 
-const Sidebar = ({ conversations }) => {
+const Sidebar = ({ conversations, isLoggedIn }) => {
+  console.log(isLoggedIn)
   return (
     <div className="sidebar">
       <div className="sidebar-header">
         <Avatar src={milopic} />
         <div className="sidebar-header-right">
-          <button>Login</button>
-          <Link to="/register">
-            <button>Register</button>
-          </Link>
+          {isLoggedIn ? (
+            <button>Logout</button>
+          ) : (
+            <>
+              <Link to="/login">
+                <button>Login</button>
+              </Link>
+              <Link to="/register">
+                <button>Register</button>
+              </Link>
+            </>
+          )}
+
+          <>
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
+            <Link to="/register">
+              <button>Register</button>
+            </Link>
+          </>
+
           <IconButton>
             <DonutLargeIcon />
           </IconButton>
